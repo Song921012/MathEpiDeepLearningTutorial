@@ -1,0 +1,58 @@
+# Determinstic Simulation of SIR Model
+
+In this part, we will do deterministic simulation of SIR model. Transmission dynamics can be divided into two parts: latent dynamics and 
+observation dynamics. Observation dynamics are concerned with data, such as accumulated cases, death cases.
+
+Latent dynamics:
+$$\left\{
+\begin{aligned}
+& \frac{\rm{d}S}{\rm{dt}} = -\beta S I,\\
+&\frac{\rm{d}I}{\rm{dt}} = \beta S I- \gamma I,\\
+&\frac{\rm{d}R}{\rm{dt}} = \gamma I\\
+\end{aligned}
+\right.
+$$
+and observation dynamics (accumulated cases for example)
+$$ \frac{\rm{d}H}{\rm{dt}} = \beta S I,$$
+sometimes also defined as 
+$$ \frac{\rm{d}H}{\rm{dt}} = \gamma I,$$
+or with delay
+$$ \frac{\rm{d}H}{\rm{dt}} = \gamma I(t-τ),$$
+
+## Loading Libraries
+
+```julia
+using DifferentialEquations
+using Plots
+```
+
+## Define the model
+
+```julia
+function SIR(du, u, p, t)
+    β, γ= p
+    S, I, R, H = u
+    du[1] = - β * S  * I
+    du[2] = β * S *  I - γ * I
+    du[3] = γ * I
+    du[4] = β * S  * I
+end
+```
+## Solve the model
+
+```julia
+tmax = 20.0
+dt = 0.1
+tspan = (0.0,tmax)
+u0 = [10,0.1,0.0,0.0]
+p = [0.2,0.1]
+prob_ode = ODEProblem(SIR,u0,tspan,p)
+sol = solve(prob_ode,Tsit5(),saveat=dt);
+```
+## Plots
+
+```julia
+plot(sol, label = ["S" "I" "R" "H"], title = "Determinstic Simulation of SIR Model")
+```
+
+
