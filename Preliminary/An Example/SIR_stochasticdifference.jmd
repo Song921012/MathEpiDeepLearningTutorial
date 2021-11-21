@@ -1,0 +1,59 @@
+In this part, we will do stochastic simulation of SIR model by  stochastic difference method. More introduction on stochastic difference method can be seen in [Simulation of stochastic dynamic models](https://kingaa.github.io/short-course/stochsim/stochsim.html). Considering the following SIR stochastic difference model
+$$\left\{
+\begin{aligned}
+& S(t+dt) = S(t) - \mathrm{Infection},\\
+& I(t+dt) = I(t) +  \mathrm{Infection} - \mathrm{Recover},\\
+& R(t+dt) = R(t) + \mathrm{Recover}\\
+\end{aligned}\right.
+$$
+where 
+$$ \begin{aligned}
+& \mathrm{Infection} \sim \mathrm{Possion}(\beta S I dt), \\ &\text{or} \quad  \mathrm{Binomial}(S, \beta I dt) \\
+&\text{or} \quad  \mathrm{Binomial}(S, 1-\exp(-\beta I dt))
+\end{aligned} $$
+and 
+$$ \begin{aligned}
+& \mathrm{Recover} \sim \mathrm{Possion}(\gamma I dt), \\ &\text{or} \quad  \mathrm{Binomial}(I, \gamma dt) \\
+&\text{or} \quad  \mathrm{Binomial}(I, 1-\exp(-\gamma dt))
+\end{aligned} $$
+## Loading Libraries
+
+```julia
+using DifferentialEquations
+using Distributions
+using Random
+using StatsPlots
+Random.seed!(1234)
+```
+
+## Define the model
+
+```julia
+function transition_rate(d,t)
+1 - exp(-d*t)
+end
+function SIR_stochastic_difference(du,u,p,t)
+    S, I, R = u
+    β, γ, dt= p
+    infect = transition_rate(β*S,dt)
+    recover = transition_rate(γ,dt)
+    Infection = rand(Binomial(S,infect))
+    Recovery = rand(Binomial(I,recover))
+    du[1] = S-Infection
+    du[2] = I+Infection-Recovery
+    du[3] = R+Recovery
+end
+```
+
+
+## Solve the model by Stochastic methods
+```julia
+tmax = 20.0
+tspan = (0.0,tmax)
+u0 = [1000,1,0.0]
+p = [0.002,0.1,0.1]
+prob_stochadiff = DiscreteProblem(SIR_stochastic_difference,u0,tspan,p)
+sol = solve(prob_stochadiff,FunctionMap())
+plot(sol, label = ["S" "I" "R"], title = "SIR Simulation by Stochastic difference Method")
+```
+
