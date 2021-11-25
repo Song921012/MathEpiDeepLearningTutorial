@@ -1,0 +1,82 @@
+# Determinstic Simulation of SIR Model
+
+In this part, we will simulate SIR stochastic differential equations:
+$$\left\{
+\begin{aligned}
+& dS = -\beta S I dt - \sqrt{\beta S I} dW_{1},\\
+& dI = \beta S I dt + \sqrt{\beta S I} dW_{1} - \gamma I dt- 0.1 \gamma I dW_{2},\\
+& dR = \gamma I dt- 0.1\gamma I dW_{2}\\
+\end{aligned}
+\right.
+$$
+
+
+## Loading Libraries
+
+```julia
+using DifferentialEquations
+using StochasticDiffEq
+using DiffEqCallbacks
+using Random
+using SparseArrays
+using DataFrames
+using StatsPlots
+Random.seed!(1234);
+```
+
+## Define determinstic part of the SIR model
+
+```julia
+function SIR(du, u, p, t)
+    β, γ= p
+    S, I, R = u
+    du[1] = - β * S  * I
+    du[2] = β * S *  I - γ * I
+    du[3] = γ * I
+end
+```
+## Define stochastic part of the SIR model
+```julia
+A = zeros(3,2)
+A[1,1] = 1
+A[2,1] = 1
+A[2,2] = 1
+A[3,2] = 1
+A = SparseArrays.sparse(A);
+function SIR_noise(du,u,p,t)
+    β, γ= p
+    S, I, R = u
+    du[1,1] = -sqrt(β * S  * I)
+    du[2,1] = sqrt(β * S  * I)
+    du[2,2] = -0.1*γ*I
+    du[3,2] = 0.1*γ*I
+end
+```
+## Solve the model
+
+```julia
+tmax = 100.0
+tspan = (0.0,tmax)
+u0 = [1000,10,0.0]
+p = [0.0002,0.1]
+prob_sde = SDEProblem(SIR, SIR_noise,u0,tspan,p,noise_rate_prototype=A)
+sol = solve(prob_sde,LambaEM());
+```
+## Plots
+
+```julia
+plot(sol, label = ["S" "I" "R" "H"], title = "Simulation of SIR Stochastic differential Model")
+```
+
+## Plots the confidence interval by multithread method
+
+```julia
+using DifferentialEquations.EnsembleAnalysis
+ensembleprob = EnsembleProblem(prob_sde)
+sol = solve(ensembleprob,EnsembleThreads(),trajectories=1000)
+summ = EnsembleSummary(sol,0:0.1:100)
+plot(summ,labels="Middle 95%")
+summ = EnsembleSummary(sol,0:0.1:100;quantiles=[0.25,0.75])
+plot!(summ,labels="Middle 50%",legend=true)
+```
+
