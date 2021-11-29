@@ -1,0 +1,16 @@
+# lognormal distributions
+
+```julia
+using Distributions
+using Expectations
+using StatsBase
+dist = LogNormal()
+E = expectation(dist)
+@show E(x->x^2)
+dist1 = Gamma()
+E1 = expectation(dist1)
+@show E1(x->x^2)
+
+crossentropy([0.2, 0.3, 0.5], [0.3, 0.4, 0.3])
+
+```
