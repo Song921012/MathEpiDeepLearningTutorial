@@ -28,10 +28,10 @@ dist3 = Normal(5,2)
 C = kldivergence(dist2,dist3)
 KullbackLeibler(dist2,dist3)
 
-D = kldivergence(dist,dist3)
+D = kldivergence(dist1,dist)
 KullbackLeibler(dist,dist3)
 
-E1(x -> log(lognormalpdf(x)/loggammapdf(x)))
+E1(x -> log(lognormalpdf(x)))- E1(x -> log(loggammapdf(x)))
 
 KullbackLeibler(x->loggammapdf(x),y->lognormalpdf(y),HyperCube([-20,20]); Carlo=true, N=Int(3e6))
 
