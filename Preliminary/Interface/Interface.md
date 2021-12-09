@@ -48,5 +48,10 @@ two(x) = py"one"(x) + py"one"(x)
 end
 ```
 
+# Python Call Julia: julia package
 
+[JuliaPy/pyjulia: python interface to julia](https://github.com/JuliaPy/pyjulia)
+
+# R Call Julia: JuliaCall
+[Non-Contradiction/JuliaCall: Embed Julia in R](https://github.com/Non-Contradiction/JuliaCall)
 
