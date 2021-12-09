@@ -1,0 +1,5 @@
+```julia
+CSV.File("your_file_name.csv", dateformat="dd-mm-yyyy") |> DataFrame
+using Dates
+df.Date = Date.(df.Date, "dd-mm-yyyy")
+```
