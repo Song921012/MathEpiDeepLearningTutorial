@@ -30,6 +30,8 @@ set JULIA_DEPOT_PATH = "path you want to install"
 
 for example: F:\Code\Julia\Julia-1.6.2\jpkgs\.julia
 
+[Julia中添加国内镜像 提升软件包安装速度【附源码】_育种数据分析之放飞自我_51CTO博客](https://blog.51cto.com/yijiaobani/2842533)
+
 # Install VScode
 
 [Visual Studio Code - Code Editing. Redefined](https://code.visualstudio.com/)
