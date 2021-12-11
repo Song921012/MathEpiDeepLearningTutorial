@@ -55,3 +55,12 @@ end
 # R Call Julia: JuliaCall
 [Non-Contradiction/JuliaCall: Embed Julia in R](https://github.com/Non-Contradiction/JuliaCall)
 
+
+
+# Jupyter
+
+Matlab Support: [mathworks/jupyter-matlab-proxy: MATLAB Integration for Jupyter](https://github.com/mathworks/jupyter-matlab-proxy)
+
+Julia Support: Ijulia
+
+R Support: [Installation · IRkernel](https://irkernel.github.io/installation/)
