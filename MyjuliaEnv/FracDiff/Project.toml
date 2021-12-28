@@ -1,0 +1,7 @@
+[deps]
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+FractionalCalculus = "638fb199-4bb2-4014-80c8-6dc0d90f156b"
+FractionalDiffEq = "c7492dd8-6170-483b-af64-cefb6c377d9a"
+FractionalSystems = "43fecb94-217b-4542-9f6a-a624b53b7d19"
+FractionalTransforms = "e50ca838-b4f0-4a10-ad18-4b920bf1ae5c"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
