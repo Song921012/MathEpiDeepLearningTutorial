@@ -4,3 +4,5 @@ Also see its twin repo [MathEpiDeepLearning: Awesome-spatial-temporal-data-minin
 
 Datas used are saved in Data foler.
 
+## Talks
+
