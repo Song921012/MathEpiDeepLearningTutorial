@@ -1,9 +1,11 @@
 [deps]
 Agents = "46ada45e-f475-11e8-01d0-f70cc89e6671"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CausalityTools = "5520caf5-2dd7-5c5d-bfcb-a00e56ac49f7"
 ChaosTools = "608a59af-f2a3-5ad4-90b4-758bdf3122a7"
 Compose = "a81c6b42-2e10-5240-aca2-a61377ecd94b"
 CrossMappings = "7011085d-2e9b-5a7b-b0c2-f102c05e50c2"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DelayEmbeddings = "5732040d-69e3-5649-938a-b6b4f237613f"
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 DynamicalSystems = "61744808-ddfa-5f27-97ff-6e42cc95d634"
