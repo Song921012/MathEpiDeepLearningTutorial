@@ -67,3 +67,7 @@ plot!(ts, data_train[3,:], label="Z (ODE)")
 plot!(ts, data_pred[1,:], label="X (NN)")
 plot!(ts, data_pred[2,:],label="V (NN)")
 plot!(ts, data_pred[3,:], label="Z (NN)")
+
+using DiffEqFlux, DifferentialEquations, Plots
+
+ann_node = FastChain(FastDense(2, 32, tanh), FastDense(32,2, tanh))
