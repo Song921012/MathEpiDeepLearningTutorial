@@ -71,3 +71,6 @@ plot!(ts, data_pred[3,:], label="Z (NN)")
 using DiffEqFlux, DifferentialEquations, Plots
 
 ann_node = FastChain(FastDense(2, 32, tanh), FastDense(32,2, tanh))
+
+using Pkg, Dates
+ Pkg.gc(collect_delay = Day(0))
