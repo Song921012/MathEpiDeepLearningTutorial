@@ -74,3 +74,6 @@ ann_node = FastChain(FastDense(2, 32, tanh), FastDense(32,2, tanh))
 
 using Pkg, Dates
  Pkg.gc(collect_delay = Day(0))
+
+using PackageCompiler
+ create_sysimage([:DifferentialEquations,:DiffEqFlux,:Flux,:Turing,:Plots,:DataFrames,:Symbolics,:ModelingToolkit,:GalacticOptim,:LinearSolve,:DiffEqSensitivity,:DiffEqOperators,:ForwardDiff,:ReverseDiff,:Zygote,:Catalyst,:JuMP,:MLJ,:Graphs,:InfiniteOpt,:NeuralPDE,:DataDrivenDiffEq,:GLMakie,:ApproxFun,:AugmentedGaussianProcesses,:DynamicalSystems,:POMDPs, :ReinforcementLearning,:GeometricFlux], sysimage_path="JuliaSysimage.dll")
