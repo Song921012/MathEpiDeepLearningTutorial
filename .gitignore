@@ -2,3 +2,5 @@ test*
 *.html
 *.cfg
 *.Rhistory
+**/build/*
+**/*.exe
