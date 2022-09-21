@@ -6,6 +6,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# VScode shell integration
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -28,14 +31,22 @@ export PATH=/opt/openrobots/bin:$PATH
 export PKG_CONFIG_PATH=/opt/openrobots/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH=/opt/openrobots/lib:$LD_LIBRARY_PATH
 # export PYTHONPATH=/usr/bin/python3
-# export PYTHONPATH=/opt/openrobots/lib/python3.10/site-packages:$PYTHONPATH
+export PYTHONPATH=/home/aidishage/Optizelle/lib/python3.8/site-packages:/opt/openrobots/lib/python3.10/site-packages:$PYTHONPATH
 export NVM_DIR="$HOME/.nvm"
+export MYCONFIGDIR="/home/aidishage/MathEpiDeepLearningTutorial/MyConfig/Linux"
 #export PETSC_ARCH=arch-linux-c-debug
 #export PETSC_DIR=/home/aidishage/petsc
 #export SLEPC_DIR=/usr/include/slepc
 
+# Alias
 
-
+alias up="sudo apt update && sudo apt upgrade"
+alias clean="sudo apt autoremove && sudo apt autoclean"
+alias make="sudo make"
+alias quartoup="source ~/quartoup.sh"
+alias fdu="du -lh --max-depth=1"
+alias juliaup="julia -e 'using Pkg;using Dates;Pkg.update();Pkg.gc(collect_delay = Day(0))'"
+alias refresh="up && clean && quartoup && juliaup"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -150,6 +161,8 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 
 
 
