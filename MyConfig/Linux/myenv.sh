@@ -16,7 +16,7 @@ sudo apt install fsearch -y
 # Install zotero
 wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
 sudo apt update
-sudo apt install zotero
+#sudo apt install zotero
 
 # Install develop environment
 sudo apt install build-essential
@@ -34,7 +34,7 @@ sudo apt install --no-install-recommends r-base
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 
 # Install texlive
-sudo apt install texlive-full -y
+# sudo apt install texlive-full -y
 
 
 # Install petsc
