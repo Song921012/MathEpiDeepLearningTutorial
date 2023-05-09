@@ -4,3 +4,5 @@ test*
 *.Rhistory
 **/build/*
 **/*.exe
+**/*.so
+/Talk/2023SNNUTalk/Manifest.toml
